@@ -1,0 +1,931 @@
+{
+  "name": "noaa-isd",
+  "title": "NOAA Integrated Surface Database (ISD)",
+  "description": "Meteorological observations from nearby weather stations.",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "title": "NOAA Integrated Surface Database FTP Access",
+      "path": "ftp://ftp.ncdc.noaa.gov/pub/data/noaa/"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Ethan Welty",
+      "email": "ethan.welty@gmail.com",
+      "role": "author"
+    }
+  ],
+  "resources": [
+    {
+      "name": "stations",
+      "path": "data/stations.csv",
+      "title": "Station metadata",
+      "schema": {
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": "Station identifier (USAF-WBAN)"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "Station name"
+          },
+          {
+            "name": "longitude",
+            "type": "number",
+            "description": "Longitude (unknown datum)",
+            "unit": "°"
+          },
+          {
+            "name": "latitude",
+            "type": "number",
+            "description": "Latitutde (unknown datum)",
+            "unit": "°"
+          },
+          {
+            "name": "elevation",
+            "type": "number",
+            "description": "Height above Mean Sea Level (MSL)",
+            "unit": "m"
+          }
+        ]
+      }
+    },
+    {
+      "name": "702750-26442",
+      "path": "data/702750-26442.csv",
+      "title": "NATIONAL WEATHER SERVICE OFFICE (702750-26442)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_2_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_3",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_3_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_3_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "snow_thickness",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "snowfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "snowfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snowfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "snowfall_2",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snowfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "solar_irradiance_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "solar_irradiance",
+            "type": "number",
+            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
+            "unit": "W m-2"
+          },
+          {
+            "name": "solar_irradiance_uncertainty",
+            "type": "number",
+            "unit": "%"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "702754-99999",
+      "path": "data/702754-99999.csv",
+      "title": "VALDEZ (702754-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          }
+        ]
+      }
+    },
+    {
+      "name": "702756-26479",
+      "path": "data/702756-26479.csv",
+      "title": "VALDEZ PIONEER FIELD AIRPORT (702756-26479)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_2_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_3",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_3_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_3_period",
+            "type": "number",
+            "unit": "s"
+          }
+        ]
+      }
+    },
+    {
+      "name": "702756-99999",
+      "path": "data/702756-99999.csv",
+      "title": "VALDEZ PIONEER FIEL (702756-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_2_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_3",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_3_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_3_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "snow_thickness",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "solar_irradiance_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "solar_irradiance",
+            "type": "number",
+            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
+            "unit": "W m-2"
+          },
+          {
+            "name": "solar_irradiance_uncertainty",
+            "type": "number",
+            "unit": "%"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "994660-99999",
+      "path": "data/994660-99999.csv",
+      "title": "POTATO POINT (994660-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "994670-99999",
+      "path": "data/994670-99999.csv",
+      "title": "MIDDLE ROCK LIGHT (994670-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "994680-99999",
+      "path": "data/994680-99999.csv",
+      "title": "BLIGH REEF LIGHT (994680-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "rainfall_2_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_2_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "998271-99999",
+      "path": "data/998271-99999.csv",
+      "title": "VALDEZ (998271-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "999999-26442",
+      "path": "data/999999-26442.csv",
+      "title": "VALDEZ WSO (999999-26442)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
