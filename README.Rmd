@@ -31,7 +31,7 @@ The data includes meteorological observations from nearby weather stations ([map
   * 997203-99999 Western Prince William Sound
   * 992850-99999 West Orca Bay
   
-```{r, fig.height=10, fig.width=8}
+```{r, fig.height=10, fig.width=10}
 dp <- dpkg::read_package()
 stations <- dp$stations
 dp$stations <- NULL
@@ -48,7 +48,9 @@ ranges$station <- ranges$station_id %>%
   match(stations$id) %>%
   extract(stations$name, .) %>%
   paste(ranges$station_id, .)
-cgr::timeline(ranges, name = "station", group = "variable", color = "gray50", width = 3)
+cgr::timeline(ranges, name = "station", group = "variable", color = "gray40", width = 3) +
+  ggplot2::xlab("Year") +
+  ggplot2::ggtitle("Observational coverage", subtitle = "sampled at daily intervals")
 ```
 
 ### Sources
