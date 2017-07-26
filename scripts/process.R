@@ -387,8 +387,8 @@ for (station_id in station_ids) {
     extract(grepl(station_id, .)) %>%
     lapply(readRDS) %>%
     cgr::rbind_tables() %>%
-    cgr::parse_table(isd_data_parser) %>%
-    cgr::remove_empty_dimensions(ignore = "t")
+    cgr::remove_empty_dimensions(ignore = "t") %>%
+    cgr::parse_table(isd_data_parser)
 }
 
 # ---- Package and write to file ----

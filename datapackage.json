@@ -62,11 +62,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -184,6 +186,11 @@
             "type": "string"
           },
           {
+            "name": "snowfall_2_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
             "name": "snowfall_2",
             "type": "number",
             "unit": "m"
@@ -200,6 +207,7 @@
           {
             "name": "solar_irradiance",
             "type": "number",
+            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
             "unit": "W m-2"
           },
           {
@@ -227,11 +235,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -266,6 +276,11 @@
             "type": "string"
           },
           {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
             "name": "air_pressure_at_sea_level_quality",
             "type": "string"
           },
@@ -294,11 +309,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -394,11 +411,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -493,6 +512,11 @@
             "type": "string"
           },
           {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
             "name": "snow_thickness_lwe_quality",
             "type": "string"
           },
@@ -504,12 +528,18 @@
           {
             "name": "solar_irradiance",
             "type": "number",
+            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
             "unit": "W m-2"
           },
           {
             "name": "solar_irradiance_uncertainty",
             "type": "number",
             "unit": "%"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "sea_surface_temperature_quality",
@@ -526,11 +556,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -588,6 +620,11 @@
             "unit": "s"
           },
           {
+            "name": "snow_thickness",
+            "type": "number",
+            "unit": "m"
+          },
+          {
             "name": "snow_thickness_quality",
             "type": "string"
           },
@@ -620,11 +657,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -648,6 +687,11 @@
           {
             "name": "air_temperature_quality",
             "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "dew_point_quality",
@@ -677,21 +721,9 @@
             "unit": "s"
           },
           {
-            "name": "rainfall_2_quality",
-            "type": "string"
-          },
-          {
-            "name": "snow_thickness_quality",
-            "type": "string"
-          },
-          {
-            "name": "snow_thickness_lwe",
+            "name": "sea_surface_temperature",
             "type": "number",
-            "unit": "m"
-          },
-          {
-            "name": "snow_thickness_lwe_quality",
-            "type": "string"
+            "unit": "°C"
           },
           {
             "name": "sea_surface_temperature_quality",
@@ -708,11 +740,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -736,6 +770,11 @@
           {
             "name": "air_temperature_quality",
             "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "dew_point_quality",
@@ -765,8 +804,9 @@
             "unit": "s"
           },
           {
-            "name": "rainfall_2_quality",
-            "type": "string"
+            "name": "snow_thickness",
+            "type": "number",
+            "unit": "m"
           },
           {
             "name": "snow_thickness_quality",
@@ -801,11 +841,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -829,6 +871,11 @@
           {
             "name": "air_temperature_quality",
             "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "dew_point_quality",
@@ -858,13 +905,9 @@
             "unit": "s"
           },
           {
-            "name": "rainfall_2_quality",
-            "type": "string"
-          },
-          {
-            "name": "rainfall_2_period",
+            "name": "snow_thickness",
             "type": "number",
-            "unit": "s"
+            "unit": "m"
           },
           {
             "name": "snow_thickness_quality",
@@ -878,6 +921,11 @@
           {
             "name": "snow_thickness_lwe_quality",
             "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "sea_surface_temperature_quality",
@@ -894,11 +942,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -961,11 +1011,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -989,6 +1041,11 @@
           {
             "name": "air_temperature_quality",
             "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "dew_point_quality",
@@ -1023,11 +1080,13 @@
         "fields": [
           {
             "name": "t",
-            "type": "string"
+            "type": "datetime",
+            "format": "%Y-%m-%dT%H:%MZ"
           },
           {
             "name": "wind_direction",
             "type": "number",
+            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -1060,6 +1119,11 @@
           {
             "name": "dew_point_quality",
             "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
           },
           {
             "name": "air_pressure_at_sea_level_quality",
