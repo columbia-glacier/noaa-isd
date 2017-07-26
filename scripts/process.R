@@ -1,12 +1,3 @@
-# ---- Install missing dependencies ----
-
-packages <- c("rnoaa", "devtools")
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-  install.packages(setdiff(packages, rownames(installed.packages())))
-}
-devtools::install_github("columbia-glacier/cgr")
-devtools::install_github("ezwelty/units2")
-devtools::install_github("ezwelty/dpkg")
 library(magrittr)
 
 # ---- Load functions ----
@@ -333,34 +324,49 @@ isd_data_parser <- list(
   }
 )
 
-# ---- Download and process station data (very slow) ----
+# ---- Download station data ----
 
-# # Get station metadata
-# stations <- rnoaa::isd_stations_search(lat = 61.141482, lon = -147.075694, radius = 50)
-# # Get station data
-# meteo <- stations %>%
-#   apply(1, function(station) {
-#     years <- station %>%
-#       extract(c("begin", "end")) %>%
-#       substr(1, 4) %>%
-#       as.numeric() %>%
-#       {.[1]:.[2]}
-#     years %>%
-#       lapply(function(year) {
-#         tryCatch(
-#           rnoaa::isd(year, usaf = station["usaf"], wban = station["wban"], parallel = TRUE, progress = TRUE),
-#           error = function(e) {
-#             warning(e)
-#             data.frame()
-#           }
-#         )
-#       }) %>%
-#       data.table::rbindlist(fill = TRUE)
-#   })
+station_ids <- c(
+  "999999-26442", "702750-26442", # Weather Service Office
+  "702756-99999", "702756-26479", "702754-99999", # Pioneer Field Airport
+  "998271-99999", # Valdez (buoy)
+  "994660-99999", # Potato Point (buoy)
+  "994670-99999", # Middle Rock Light (buoy)
+  "994680-99999", # Bligh Reef Light (buoy)
+  "997203-99999", # Western Prince William Sound (buoy)
+  "992850-99999" # West Orca Bay (buoy)
+)
 
-# ---- Load archived station data (slow) ----
+# Get station metadata
+stations <- rnoaa::isd_stations_search(lat = 61.141482, lon = -147.075694, radius = 100)
+stations$id <- paste0(stations$usaf, "-", stations$wban)
+stations <- stations[stations$id %in% station_ids, ]
 
-files <- file.path("sources") %>%
+# Download station data
+for (station_id in station_ids) {
+  station <- stations[stations$id == station_id, ]
+  years <- station %>%
+    extract(c("begin", "end")) %>%
+    substr(1, 4) %>%
+    as.numeric() %>%
+    {.[1]:.[2]}
+  for (year in years) {
+    basename <- paste0(station["id"], "-", year, ".rds")
+    file <- file.path("archive", basename)
+    if (!file.exists(file)) {
+      temp <- try(
+        rnoaa::isd(year, usaf = station["usaf"], wban = station["wban"], parallel = TRUE, progress = TRUE),
+        silent = TRUE
+      )
+      file.copy(from = file.path(rappdirs::user_cache_dir("rnoaa/isd"), basename), to = file)
+    }
+  }
+}
+
+# ---- Load station data ----
+
+# Load station metadata
+files <- file.path("archive") %>%
   list.files(pattern = "[0-9]{6}\\-[0-9]{5}\\-[0-9]{4}\\.rds", full.names = TRUE)
 station_ids <- regexpr("[0-9]{6}\\-[0-9]{5}", files) %>%
   regmatches(files, .) %>%
@@ -372,45 +378,42 @@ stations <- rnoaa::isd_stations() %>%
   dplyr::filter(
     id %in% station_ids
   )
-meteo <- station_ids %>%
-  lapply(function(id) {
-    cat(".")
-    files %>%
-      extract(grepl(id, .)) %>%
-      lapply(readRDS) %>%
-      cgr::rbind_tables()
-  }) %>%
-  set_names(station_ids)
 
-# ---- Parse and write to file ----
+# Load and parse station data
+parsed <- list()
+for (station_id in station_ids) {
+  cat(".")
+  parsed[[station_id]] <- files %>%
+    extract(grepl(station_id, .)) %>%
+    lapply(readRDS) %>%
+    cgr::rbind_tables() %>%
+    cgr::parse_table(isd_data_parser) %>%
+    cgr::remove_empty_dimensions(ignore = "t")
+}
 
-# Parse data
-parsed <- meteo %>%
-  lapply(function(x) {
-    cat(".")
-    x %>%
-      cgr::parse_table(isd_data_parser) %>%
-      cgr::remove_empty_dimensions(ignore = "t")
-  })
+# ---- Package and write to file ----
+
 # Set resources
 for (i in seq_along(parsed)) {
-  id <- names(parsed)[i]
-  station_name <- stations$station_name[stations$id == id]
+  station_id <- names(parsed)[i]
+  station_name <- stations$station_name[stations$id == station_id]
   parsed[[i]] %<>%
     dpkg::set_resource(
-      title = paste0(station_name, " (", id, ")"),
-      path = file.path("data", paste0(id, ".csv"))
+      title = paste0(station_name, " (", station_id, ")"),
+      path = file.path("data", paste0(station_id, ".csv"))
     )
 }
+
 # Append stations
 station_dr <- stations %>%
-  cgr::parse_table(functions = isd_station_parser) %>%
+  cgr::parse_table(isd_station_parser) %>%
   dpkg::set_resource(
     name = "stations",
     path = "data/stations.csv",
     title = "Station metadata"
   )
 parsed %<>% c(list(station_dr), .)
+
 # Set package
 parsed %<>%
   dpkg::set_package(
@@ -425,5 +428,6 @@ parsed %<>%
       dpkg::source(title = "NOAA Integrated Surface Database FTP Access", path = "ftp://ftp.ncdc.noaa.gov/pub/data/noaa/")
     )
   )
+
 # Write package
 dpkg:::write_package(parsed)

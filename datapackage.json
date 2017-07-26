@@ -62,13 +62,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -202,7 +200,6 @@
           {
             "name": "solar_irradiance",
             "type": "number",
-            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
             "unit": "W m-2"
           },
           {
@@ -230,13 +227,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -299,13 +294,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -401,13 +394,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -513,13 +504,106 @@
           {
             "name": "solar_irradiance",
             "type": "number",
-            "description": "Direct and diffuse solar radiation received on a horizontal surface (modeled)",
             "unit": "W m-2"
           },
           {
             "name": "solar_irradiance_uncertainty",
             "type": "number",
             "unit": "%"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "992850-99999",
+      "path": "data/992850-99999.csv",
+      "title": "WEST ORCA BAY 36NM SOUTH SOUTHWEST OF VA (992850-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "string"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "rainfall_1_quality",
+            "type": "string"
+          },
+          {
+            "name": "rainfall_1_period",
+            "type": "number",
+            "unit": "s"
+          },
+          {
+            "name": "snow_thickness_quality",
+            "type": "string"
+          },
+          {
+            "name": "snow_thickness_lwe",
+            "type": "number",
+            "unit": "m"
+          },
+          {
+            "name": "snow_thickness_lwe_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
           },
           {
             "name": "sea_surface_temperature_quality",
@@ -536,13 +620,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -626,13 +708,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -721,13 +801,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -809,6 +887,73 @@
       }
     },
     {
+      "name": "997203-99999",
+      "path": "data/997203-99999.csv",
+      "title": "WESTERN PRINCE WILLIAM SOUND (997203-99999)",
+      "schema": {
+        "fields": [
+          {
+            "name": "t",
+            "type": "string"
+          },
+          {
+            "name": "wind_direction",
+            "type": "number",
+            "unit": "rad"
+          },
+          {
+            "name": "wind_direction_quality",
+            "type": "string"
+          },
+          {
+            "name": "wind_speed",
+            "type": "number",
+            "unit": "m s-1"
+          },
+          {
+            "name": "wind_speed_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "air_temperature_quality",
+            "type": "string"
+          },
+          {
+            "name": "dew_point",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "dew_point_quality",
+            "type": "string"
+          },
+          {
+            "name": "air_pressure_at_sea_level",
+            "type": "number",
+            "unit": "Pa"
+          },
+          {
+            "name": "air_pressure_at_sea_level_quality",
+            "type": "string"
+          },
+          {
+            "name": "sea_surface_temperature",
+            "type": "number",
+            "unit": "°C"
+          },
+          {
+            "name": "sea_surface_temperature_quality",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
       "name": "998271-99999",
       "path": "data/998271-99999.csv",
       "title": "VALDEZ (998271-99999)",
@@ -816,13 +961,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
@@ -880,13 +1023,11 @@
         "fields": [
           {
             "name": "t",
-            "type": "datetime",
-            "format": "%Y-%m-%dT%H:%MZ"
+            "type": "string"
           },
           {
             "name": "wind_direction",
             "type": "number",
-            "description": "Wind direction (direction of travel counterclockwise from east)",
             "unit": "rad"
           },
           {
