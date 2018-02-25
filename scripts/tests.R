@@ -34,7 +34,7 @@ breaks <- seq(min(endpoints), max(endpoints), by = 3600 * 24)
 temp <- data[
   station_id %chin% c("702756-26479", "702756-99999")
 ][, 
-  cgr::sample_interval(.SD, t, breaks), by = "station_id", .SDcols = variables
+  cgr::sample_interval(.SD, t, breaks, na.rm = TRUE), by = "station_id", .SDcols = variables
 ]
 
 variable <- "air_temperature"
@@ -61,7 +61,7 @@ breaks <- seq(min(endpoints), max(endpoints), by = 3600 * 24)
 temp <- data[
   station_id %chin% c("702750-26442", "702756-99999")
 ][
-  , cgr::sample_interval(.SD, t, breaks), by = "station_id", .SDcols = variables
+  , cgr::sample_interval(.SD, t, breaks, na.rm = TRUE), by = "station_id", .SDcols = variables
 ]
 
 variable <- "air_temperature"
@@ -71,6 +71,16 @@ abline(0, 1)
 temp %>%
   ggplot(aes_string("t", variable, color = "station_id")) +
   geom_line()
+
+# Timeline
+endpoints <- as.POSIXct(c("2005-01-01", "2007-12-31"), tz = "UTC")
+ranges <- cgr::tblranges(
+  data[station_id %chin% c("702756-26479", "702756-99999", "702750-26442") & t %between% endpoints, c("t", "station_id", variables), with = FALSE],
+  time_col = "t",
+  group_col = "station_id",
+  maxdt = 60 * 60 * 24
+)
+cgr::timeline(ranges, name = "station_id", group = "variable", color = "gray40", width = 3)
 
 # ---- Solar irradiance vs. Air temperature ----
 
@@ -111,3 +121,30 @@ station_ids <- coverage$station_id[coverage[[2]]]
 temp[station_id %chin% station_ids] %>%
   ggplot(aes_string("t", variable, color = "station_id")) +
   geom_line()
+
+# ---- Temperature ----
+
+temperatures <- list()
+gap_start <- data[station_id == "702750-26442" & !is.na(air_temperature) & t < as.POSIXct("2006-01-01", tz = "UTC"), max(t)]
+gap_end <- data[station_id == "702756-26479" & !is.na(air_temperature), min(t)]
+
+# Valdez National Weather Service Office
+temperatures$`999999-26442` <- data[station_id == "999999-26442"]
+temperatures$`702750-26442` <- data[station_id == "702750-26442" & t <= gap_start]
+# Valdez Pioneer Field Airport
+temperatures$`702756-99999` <- data[station_id == "702756-99999" & t > gap_start & t < gap_end]
+temperatures$`702756-26479` <- data[station_id == "702756-26479" & t >= gap_end]
+# Merge together
+temperatures %<>%
+  data.table::rbindlist()
+# Save to file
+temperatures[, .(t, air_temperature)] %>%
+  data.table::fwrite("~/desktop/temperatures.csv")
+
+# cgr::tblranges(
+#   temperatures,
+#   time_col = "t",
+#   group_col = "station_id",
+#   maxdt = 60 * 60 * 24
+# ) %>%
+# cgr::timeline(name = "station_id", group = "variable", color = "gray40", width = 3)
